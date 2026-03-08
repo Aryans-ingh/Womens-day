@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Women's Day, Shreejal! 💖🐱✨</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5e1fd 0%, #ffe4f9 50%, #fff0f8 100%);
+      color: #333;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+    /* Floating hearts + tiny cats */
+    .hearts {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .heart, .tiny-cat {
+      position: absolute;
+      font-size: 20px;
+      animation: float 10s linear infinite;
+      opacity: 0.8;
+    }
+    .tiny-cat { font-size: 16px; }
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); }
+      100% { transform: translateY(-20vh) rotate(720deg); }
+    }
+
+    header {
+      text-align: center;
+      padding: 50px 20px 20px;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(10px);
+      position: relative;
+      z-index: 10;
+    }
+    h1 {
+      font-size: 3.5rem;
+      color: #c71585;
+      text-shadow: 3px 3px 10px rgba(199,21,133,0.4);
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      font-size: 1.5rem;
+      color: #6a1b9a;
+    }
+
+    .slideshow-container {
+      max-width: 950px;
+      position: relative;
+      margin: 40px auto;
+      background: white;
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(186,85,211,0.3);
+      z-index: 5;
+    }
+
+    .mySlides {
+      display: none;
+      padding: 60px 50px;
+      text-align: center;
+      min-height: 550px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .mySlides h2 {
+      font-size: 2.8rem;
+      color: #8e24aa;
+      margin-bottom: 20px;
+    }
+
+    .mySlides p {
+      font-size: 1.4rem;
+      line-height: 1.7;
+      max-width: 750px;
+      color: #444;
+      margin-bottom: 25px;
+    }
+
+    .emoji {
+      font-size: 5rem;
+      margin: 20px 0;
+    }
+
+    /* Cute cat stickers */
+    .cat-sticker {
+      width: 90px;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      margin: 15px;
+      transform: rotate(-5deg);
+      transition: transform 0.3s;
+    }
+    .cat-sticker:hover { transform: rotate(0deg) scale(1.1); }
+    .cat-left { position: absolute; left: 30px; top: 80px; transform: rotate(-12deg); }
+    .cat-right { position: absolute; right: 30px; bottom: 100px; transform: rotate(12deg); }
+    .cat-center { margin: 20px auto; }
+
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: 55px;
+      height: 55px;
+      background: rgba(255,105,180,0.8);
+      color: white;
+      font-size: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.4s;
+      z-index: 9;
+    }
+    .prev { left: 25px; }
+    .next { right: 25px; }
+    .prev:hover, .next:hover { background: #ff1493; transform: scale(1.15); }
+
+    .dot-container {
+      text-align: center;
+      padding: 25px;
+    }
+    .dot {
+      height: 16px;
+      width: 16px;
+      margin: 0 10px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s;
+      cursor: pointer;
+    }
+    .active, .dot:hover { background-color: #c71585; }
+
+    /* Tic Tac Toe Slide */
+    #ttt-slide {
+      background: linear-gradient(to bottom, #f3e5f5, #e1bee7);
+    }
+    #game-board {
+      display: grid;
+      grid-template-columns: repeat(3, 120px);
+      grid-gap: 12px;
+      margin: 30px auto;
+      justify-content: center;
+    }
+    .cell {
+      width: 120px;
+      height: 120px;
+      background: white;
+      border-radius: 16px;
+      font-size: 4.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+    .cell:hover { transform: scale(1.05); }
+    #status {
+      font-size: 1.6rem;
+      margin: 20px 0;
+      color: #6a1b9a;
+      min-height: 40px;
+    }
+    #restart {
+      padding: 12px 30px;
+      font-size: 1.2rem;
+      background: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    #restart:hover { background: #ff1493; }
+
+    footer {
+      text-align: center;
+      padding: 50px 20px;
+      color: #555;
+      font-size: 1.2rem;
+      z-index: 5;
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hearts" id="hearts"></div>
+
+  <header>
+    <h1>Happy Women's Day, My Shreejal! 🌸💕🐱</h1>
+    <p class="subtitle">You're the cutest, strongest, most lovable person — today is all about YOU! 🐾✨</p>
+  </header>
+
+  <div class="slideshow-container">
+
+    <!-- Slide 1 -->
+    <div class="mySlides">
+      <img src="https://wallpapers-clan.com/wp-content/uploads/2025/10/cute-cats-holding-heart-sticker-preview.jpg" alt="Cute cats holding heart" class="cat-sticker cat-center">
+      <div class="emoji">💖🌷</div>
+      <h2>To the most beautiful soul I know</h2>
+      <p>Dear Shreejal, your smile lights up my entire world like these little kitty hearts! Your kindness, laugh, strength — pure magic. Happy Women's Day, my favorite forever! 💞🐱</p>
+      <img src="https://i.etsystatic.com/49035692/r/il/6d1320/6191454347/il_fullxfull.6191454347_p2yp.jpg" alt="Black cat heart eyes" class="cat-sticker cat-right">
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="mySlides">
+      <img src="https://i.etsystatic.com/34815961/r/il/09e379/5037479990/il_fullxfull.5037479990_lk4b.jpg" alt="Cat with hearts thumbs up" class="cat-sticker cat-left">
+      <div class="emoji">🌟👑</div>
+      <h2>You are my Queen</h2>
+      <p>Every look at you feels lucky — you're graceful, powerful, and adorable like these kitty stickers! Thank you for being my safe place and inspiration. You deserve the universe! 💜🐾</p>
+      <img src="https://i.etsystatic.com/44110939/r/il/3b7e82/6479771162/il_fullxfull.6479771162_dka8.jpg" alt="Orange cat pack" class="cat-sticker" style="width:120px;">
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="mySlides">
+      <div class="emoji">😘🌸</div>
+      <h2>Little sweet gestures for you</h2>
+      <p>✨ 1000 virtual forehead kisses<br>✨ Warmest hug ever<br>✨ Coffee just right<br>✨ Telling you you're beautiful nonstop<br>Because you deserve endless love — meow! 🥰🐱</p>
+      <img src="https://i.etsystatic.com/36943619/r/il/dd56c3/6725599449/il_fullxfull.6725599449_n39f.jpg" alt="Cat love sticker" class="cat-sticker cat-center">
+      <img src="https://i.etsystatic.com/34815961/r/il/c9cbd6/5037479980/il_fullxfull.5037479980_7doz.jpg" alt="Cat with hearts" class="cat-sticker cat-right">
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="mySlides">
+      <img src="https://i.etsystatic.com/61014504/r/il/0f15cc/7406419668/il_fullxfull.7406419668_2z6d.jpg" alt="Cute cat emotes" class="cat-sticker cat-left">
+      <div class="emoji">🎀💐</div>
+      <h2>Shreejal — my everything</h2>
+      <p>Your heart is huge, dreams bright, love pure. Grateful for every second with you. May this Women's Day shower you with joy — just like these kitty hugs! 💕🐾</p>
+      <img src="https://thumbs.dreamstime.com/z/cat-kitten-kitty-head-face-holding-big-pink-heart-family-couple-happy-valentines-day-cute-cartoon-kawaii-funny-animal-character-170266815.jpg" alt="Cat holding heart" class="cat-sticker cat-right">
+    </div>
+
+    <!-- Slide 5 – Tic Tac Toe -->
+    <div class="mySlides" id="ttt-slide">
+      <img src="https://i.etsystatic.com/49035692/r/il/6d1320/6191454347/il_fullxfull.6191454347_p2yp.jpg" alt="Heart eyes cat" class="cat-sticker cat-center">
+      <h2>Play a cute game with me! 😍🐱</h2>
+      <p>Beat me in Tic-Tac-Toe! You = <strong>X</strong>, Me = <strong>O</strong> 💜 (with kitty応援!)</p>
+      <div id="game-board"></div>
+      <div id="status">Your turn, Shreejal! 🌸🐾</div>
+      <button id="restart">Play Again 🐱</button>
+    </div>
+
+    <!-- Slide 6 -->
+    <div class="mySlides">
+      <div class="emoji">🥰🌈</div>
+      <h2>Forever & Always</h2>
+      <p>Shreejal, you're extraordinary every day — thank you for being you. Happy Women's Day, my love, best friend, everything. To us forever! 💖✨🐱</p>
+      <img src="https://c8.alamy.com/comp/2E4DTKR/cute-valentine-cat-couple-with-heart-love-happy-valentines-day-cute-cat-cartoon-outline-pink-heart-vector-for-banner-printable-stuff-greeting-car-2E4DTKR.jpg" alt="Cute cat couple love" class="cat-sticker cat-center">
+    </div>
+
+    <!-- Navigation -->
+    <span class="prev" onclick="plusSlides(-1)">❮</span>
+    <span class="next" onclick="plusSlides(1)">❯</span>
+  </div>
+
+  <div class="dot-container">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+    <span class="dot" onclick="currentSlide(4)"></span>
+    <span class="dot" onclick="currentSlide(5)"></span>
+    <span class="dot" onclick="currentSlide(6)"></span>
+  </div>
+
+  <footer>
+    Made with tons of love + kitty cuddles just for Shreejal 💕🐱 | March 2026
+  </footer>
+
+  <script>
+    // Slideshow (same as before)
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+      let i;
+      let slides = document.getElementsByClassName("mySlides");
+      let dots = document.getElementsByClassName("dot");
+      if (n > slides.length) {slideIndex = 1}
+      if (n < 1) {slideIndex = slides.length}
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex-1].style.display = "flex";
+      dots[slideIndex-1].className += " active";
+    }
+
+    // Floating hearts + cats
+    function createFloat(type = 'heart') {
+      const elem = document.createElement("div");
+      elem.className = type === 'heart' ? "heart" : "tiny-cat";
+      elem.innerHTML = type === 'heart' ? "💗" : "🐱";
+      elem.style.left = Math.random() * 100 + "vw";
+      elem.style.animationDuration = (Math.random() * 6 + 8) + "s";
+      elem.style.animationDelay = Math.random() * 5 + "s";
+      document.getElementById("hearts").appendChild(elem);
+      setTimeout(() => elem.remove(), 12000);
+    }
+    setInterval(() => createFloat('heart'), 350);
+    setInterval(() => createFloat('cat'), 800);
+
+    // Tic Tac Toe (same as before)
+    const board = document.getElementById("game-board");
+    const status = document.getElementById("status");
+    const restartBtn = document.getElementById("restart");
+    let cells = [];
+    let currentPlayer = "X";
+    let gameActive = true;
+
+    function createBoard() {
+      board.innerHTML = "";
+      cells = [];
+      for (let i = 0; i < 9; i++) {
+        const cell = document.createElement("div");
+        cell.className = "cell";
+        cell.dataset.index = i;
+        cell.addEventListener("click", handleClick);
+        board.appendChild(cell);
+        cells.push("");
+      }
+      status.textContent = "Your turn, Shreejal! 🌸🐱";
+      currentPlayer = "X";
+      gameActive = true;
+    }
+
+    function handleClick(e) {
+      const index = e.target.dataset.index;
+      if (cells[index] !== "" || !gameActive || currentPlayer !== "X") return;
+
+      cells[index] = "X";
+      e.target.textContent = "X";
+      if (checkWin("X")) {
+        status.textContent = "Yay! You won, my superstar kitty! 🏆💖";
+        gameActive = false;
+        return;
+      }
+      if (cells.every(cell => cell !== "")) {
+        status.textContent = "Tie! You're too clever for me 😘🐾";
+        gameActive = false;
+        return;
+      }
+
+      currentPlayer = "O";
+      status.textContent = "My turn... 💜🐱";
+      setTimeout(aiMove, 600);
+    }
+
+    function aiMove() {
+      let bestScore = -Infinity;
+      let bestMove;
+      for (let i = 0; i < 9; i++) {
+        if (cells[i] === "") {
+          cells[i] = "O";
+          let score = minimax(cells, 0, false);
+          cells[i] = "";
+          if (score > bestScore) {
+            bestScore = score;
+            bestMove = i;
+          }
+        }
+      }
+      if (bestMove !== undefined) {
+        cells[bestMove] = "O";
+        board.children[bestMove].textContent = "O";
+        if (checkWin("O")) {
+          status.textContent = "Hehe, I won! But you're still my favorite 💕🐱";
+          gameActive = false;
+          return;
+        }
+        if (cells.every(cell => cell !== "")) {
+          status.textContent = "Tie! Love playing with you 🥰";
+          gameActive = false;
+          return;
+        }
+      }
+      currentPlayer = "X";
+      status.textContent = "Your turn, beautiful! 🌷🐾";
+    }
+
+    function minimax(boardState, depth, isMaximizing) {
+      if (checkWin("O")) return 10 - depth;
+      if (checkWin("X")) return depth - 10;
+      if (boardState.every(cell => cell !== "")) return 0;
+
+      if (isMaximizing) {
+        let best = -Infinity;
+        for (let i = 0; i < 9; i++) {
+          if (boardState[i] === "") {
+            boardState[i] = "O";
+            best = Math.max(best, minimax(boardState, depth + 1, false));
+            boardState[i] = "";
+          }
+        }
+        return best;
+      } else {
+        let best = Infinity;
+        for (let i = 0; i < 9; i++) {
+          if (boardState[i] === "") {
+            boardState[i] = "X";
+            best = Math.min(best, minimax(boardState, depth + 1, true));
+            boardState[i] = "";
+          }
+        }
+        return best;
+      }
+    }
+
+    function checkWin(player) {
+      const winPatterns = [
+        [0,1,2], [3,4,5], [6,7,8],
+        [0,3,6], [1,4,7], [2,5,8],
+        [0,4,8], [2,4,6]
+      ];
+      return winPatterns.some(pattern =>
+        pattern.every(index => cells[index] === player)
+      );
+    }
+
+    restartBtn.addEventListener("click", createBoard);
+    createBoard();
+  </script>
+</body>
+</html>
